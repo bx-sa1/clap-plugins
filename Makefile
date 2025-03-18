@@ -1,6 +1,6 @@
-TARGET_EXEC := gain.clap
-BUILD_DIR := ./build
-SRC_DIRS := ./src
+TARGET := $(PROJECT).clap
+BUILD_DIR := ./$(PROJECT)/build
+SRC_DIRS := ./$(PROJECT)/src
 
 SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
@@ -11,7 +11,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+$(BUILD_DIR)/$(TARGET): $(OBJS)
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.c.o: %.c
